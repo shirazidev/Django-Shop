@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 
 services:
   db:
@@ -11,26 +11,26 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     restart: always
-
   backend:
     container_name: backend
-    image: 
-      build:
-        context: .
-        dockerfile: ./dockerfiles/dev/django/Dockerfile
-      volumes:
-        - ./core:/user/src/app
-      environment:
-        - DEBUG=True
-      restart: always
-      depends_on:
-        - db
+    build:
+      context: .
+      dockerfile: ./dockerfiles/dev/django/Dockerfile
+    volumes:
+      - ./core:/usr/src/app
+    working_dir: /usr/src/app
+    command: django-admin startproject core .
+    environment:
+      - DEBUG=True
+    # restart: always
+    depends_on:
+      - db
   
   smtp4dev:
     image: rnwood/smtp4dev:v3
     restart: always
     ports:
-      - '5000:80'
+      - '5001:80'
       - '25:25'
       - '143:143'
     volumes:

@@ -28,6 +28,8 @@ services:
       - 8000:8000
     environment:
       - DEBUG=True
+    env_file:
+      - ./envs/dev/django/.env
     restart: always
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000"]

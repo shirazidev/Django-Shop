@@ -16,29 +16,23 @@ services:
     #   - 5432:5432
     restart: always
   backend:
-    container_name: backend
-    build:
-      context: .
-      dockerfile: ./dockerfiles/dev/django/Dockerfile
-    volumes:
-      - ./core:/usr/src/app
-    working_dir: /usr/src/app
-    command: python manage.py runserver 0.0.0.0:8000
-    ports:
-      - 8000:8000
-    environment:
-      - DEBUG=True
-    env_file:
-      - ./envs/dev/django/.env
-    restart: always
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000"]
-      interval: 1m30s
-      timeout: 10s
-      retries: 3
-    depends_on:
-      - db
-  
+      container_name: backend
+      build:
+        context: .
+        dockerfile: ./dockerfiles/dev/django/Dockerfile
+      volumes: 
+        - ./core:/usr/src/app
+      working_dir: /usr/src/app
+      command: python manage.py runserver 0.0.0.0:8000
+      ports:
+        - 8000:8000
+      environment:
+        - DEBUG=True
+      env_file:
+        - ./envs/dev/django/.env
+      restart: always
+      depends_on:
+        - db  
   smtp4dev:
     image: rnwood/smtp4dev:v3
     restart: always

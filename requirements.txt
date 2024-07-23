@@ -1,8 +1,9 @@
 # main modules
 django >4.2,<4.3
-
-
+django-debug-toolbar
+python-decouple==3.8
+pillow
 
 # database modules
 psycopg[binary]
-python-decouple==3.8
+

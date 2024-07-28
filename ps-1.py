@@ -1,6 +1,6 @@
 import re
 
-
+# https://github.com/shirazidev/Django-Shop
 # iran mobile
 
 phone_pat = re.compile(r'^(\+98|0)?9\d{9}$')
